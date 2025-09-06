@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Vegetables - The Wholesale King Ltd Services</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #22c55e;
+            --primary-green-dark: #16a34a;
+            --primary-green-light: #4ade80;
+            --light-bg: #f8f9fa;
+            --lighter-bg: #ffffff;
+            --text-dark: #212529;
+            --text-muted: #6c757d;
+            --border-color: #dee2e6;
+            --card-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+            --dark-bg: #0f172a;
+            --text-light: #f8fafc;
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: var(--lighter-bg);
+            color: var(--text-dark);
+            padding-top: 120px; /* account for both bars */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .top-contact-bar {
+            background: linear-gradient(90deg, var(--primary-green), var(--primary-green-dark));
+            color: white;
+            padding: 6px 0;
+            font-size: 0.85rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1051;
+        }
+        
+        .top-contact-bar a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .top-contact-bar a:hover {
+            color: var(--text-light);
+            text-decoration: underline;
+        }
+        
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 0;
+            transition: var(--transition);
+            position: fixed;
+            top: 35px; /* push below contact bar (adjust if bar height changes) */
+            left: 0;
+            width: 100%;
+            z-index: 1050;
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            color: var(--primary-green) !important;
+            font-size: 1.6rem;
+        }
+        
+        .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-green);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-green) !important;
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 70%;
+        }
+        
+        .hero-section-small {
+            background: linear-gradient(rgba(255, 255, 255, 0.39), rgba(255, 255, 255, 0.9)), 
+                       url('https://thewholesalekingltd.com/images/bg_2.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 5rem 0;
+            margin-top: 2rem;
+            border-radius: 0.5rem;
+        }
+        
+        .btn {
+            border-radius: 50px;
+            font-weight: 600;
+            padding: 0.8rem 2rem;
+            transition: var(--transition);
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3);
+        }
+        
+        .btn-outline-success {
+            color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+        
+        .btn-outline-success:hover {
+            background-color: var(--primary-green);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(34, 197, 94, 0.3);
+        }
+        
+        .card {
+            border: none;
+            border-radius: 0.75rem;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .bg-light-custom {
+            background-color: var(--light-bg);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 0.25rem rgba(34, 197, 94, 0.25);
+        }
+        
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100vh;
+            background-color: white;
+            z-index: 1050;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1040;
+            display: none;
+        }
+        
+        .cart-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cart-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        footer {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-title {
+            position: relative;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-green);
+        }
+        
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-link:hover {
+            color: var(--primary-green);
+            transform: translateX(5px);
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition);
+            margin-right: 0.5rem;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary-green);
+            transform: translateY(-3px);
+        }
+        
+        .badge {
+            font-size: 0.7rem;
+        }
+        
+        .text-success {
+            color: var(--primary-green) !important;
+        }
+        
+        .border-success {
+            border-color: var(--primary-green) !important;
+        }
+        
+        .whatsapp-btn {
+            background-color: #25D366;
+            border-color: #25D366;
+        }
+        
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            border-color: #128C7E;
+        }
+        
+        @media (max-width: 768px) {
+            .cart-sidebar {
+                width: 300px;
+            }
+            
+            .hero-section-small {
+                padding: 3rem 0;
+            }
+            
+            .btn {
+                padding: 0.7rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Contact Bar -->
+    <div class="top-contact-bar">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="d-flex gap-4">
+                        <a href="mailto:thewholesalekingltd@gmail.com">
+                            <i class="fas fa-envelope me-1"></i> thewholesalekingltd@gmail.com
+                        </a>
+                        <a href="tel:+15551234567">
+                            <i class="fas fa-phone me-1"></i> 	+1 917-605-0484
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="d-flex gap-3 justify-content-md-end">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                The Wholesale King Ltd
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="greenhouse.html">Greenhouse</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="vegetables.html">Vegetables</a></li>
+                    <li class="nav-item"><a class="nav-link" href="freight.html">Freight</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item ms-2">
+                        <button class="btn btn-outline-success position-relative" onclick="toggleCart()">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartCount">0</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section-small">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 text-center">
+                    <h1 class="display-4 fw-bold mb-4">Fresh Organic Vegetables</h1>
+                    <p class="lead text-muted">Farm-fresh, organic vegetables delivered straight to your door</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Filters -->
+<section class="py-4 my-4 bg-light-custom">
+  <div class="container">
+    <div class="row align-items-center g-3">
+      <div class="col-lg-6 d-flex gap-2 flex-wrap">
+        <button class="btn btn-success filter-btn active" data-category="all">All Products</button>
+        <button class="btn btn-outline-success filter-btn" data-category="leafy">Leafy Greens</button>
+        <button class="btn btn-outline-success filter-btn" data-category="root">Root Vegetables</button>
+        <button class="btn btn-outline-success filter-btn" data-category="fruit">Fruit Vegetables</button>
+        <button class="btn btn-outline-success filter-btn" data-category="herbs">Herbs</button>
+      </div>
+      <div class="col-lg-6 d-flex gap-2 justify-content-lg-end flex-wrap">
+        <select class="form-select" id="sortSelect" style="width:auto">
+          <option value="name">Sort by Name</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="popular">Most Popular</option>
+        </select>
+        <div class="input-group" style="width:260px">
+          <input type="text" class="form-control" id="searchInput" placeholder="Search vegetables...">
+          <button class="btn btn-outline-success" id="searchBtn" type="button"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4" id="productsContainer"></div>
+  </div>
+</section>
+
+<!-- Cart Sidebar -->
+<div class="cart-sidebar" id="cartSidebar" aria-hidden="true">
+  <div class="cart-header">
+    <h5 class="mb-0"><i class="fas fa-shopping-cart me-2 text-success"></i>Shopping Cart</h5>
+    <button class="btn btn-sm btn-outline-secondary" id="closeCartBtn"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="cart-body" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <span class="fw-bold">Subtotal:</span><span class="text-success fw-bold" id="cartSubtotal">$0.00</span>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <span class="fw-bold">Delivery:</span><span class="text-success fw-bold">Free</span>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <span class="fw-bold fs-5">Total:</span><span class="text-success fw-bold fs-4" id="cartTotal">$0.00</span>
+    </div>
+    <button class="btn whatsapp-btn w-100 mb-2" id="whatsappCheckoutBtn">
+      <i class="fab fa-whatsapp me-2"></i>Checkout via WhatsApp
+    </button>
+    <button class="btn btn-outline-secondary w-100" id="clearCartBtn"><i class="fas fa-trash me-2"></i>Clear Cart</button>
+  </div>
+</div>
+<div class="cart-overlay" id="cartOverlay"></div>
+
+<!-- Checkout Modal -->
+<div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg"><div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title"><i class="fab fa-whatsapp me-2" style="color:#25D366"></i>WhatsApp Checkout</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-info">
+        <i class="fas fa-info-circle me-2"></i>You'll be redirected to WhatsApp to complete your order.
+      </div>
+      
+      <form id="customerInfoForm">
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label for="customerName" class="form-label">Full Name *</label>
+            <input type="text" class="form-control" id="customerName" required>
+          </div>
+          <div class="col-md-6">
+            <label for="customerPhone" class="form-label">Phone Number *</label>
+            <input type="tel" class="form-control" id="customerPhone" required>
+          </div>
+        </div>
+        
+        <div class="mb-3">
+          <label for="customerAddress" class="form-label">Delivery Address *</label>
+          <textarea class="form-control" id="customerAddress" rows="2" required></textarea>
+        </div>
+        
+        <div class="mb-3">
+          <label for="customerNotes" class="form-label">Order Notes</label>
+          <textarea class="form-control" id="customerNotes" rows="2" placeholder="Special delivery instructions or requests"></textarea>
+        </div>
+        
+        <div class="border-top pt-3 mt-3">
+          <h6>Order Summary</h6>
+          <div id="checkoutSummary"></div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+      <button type="button" class="btn whatsapp-btn" id="confirmWhatsAppBtn">
+        <i class="fab fa-whatsapp me-2"></i>Complete Order via WhatsApp
+      </button>
+    </div>
+  </div></div>
+</div>
+
+    <!-- Footer -->
+    <footer class="bg-dark py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-3">The Wholesale King Ltd</h5>
+                    <p class="text-light">Your trusted partner for greenhouse construction, fresh vegetables, and reliable freight services.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-light"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-linkedin fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="text-white mb-3">Services</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="greenhouse.html" class="text-light text-decoration-none">Greenhouse</a></li>
+                        <li><a href="vegetables.html" class="text-light text-decoration-none">Vegetables</a></li>
+                        <li><a href="freight.html" class="text-light text-decoration-none">Freight</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="text-white mb-3">Company</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="about.html" class="text-light text-decoration-none">About Us</a></li>
+                        <li><a href="contact.html" class="text-light text-decoration-none">Contact</a></li>
+                        <li><a href="blog.html" class="text-light text-decoration-none">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h6 class="text-white mb-3">Contact Info</h6>
+                    <p class="text-light mb-2">
+                        <i class="fas fa-map-marker-alt me-2"></i> Head Office: Trinidad & Tobago
+                    </p>
+                    <p class="text-light mb-2">
+                        <i class="fas fa-phone me-2"></i>	+1 917-605-0484
+                    </p>
+                    <p class="text-light mb-2">
+                        <i class="fas fa-envelope me-2"></i>thewholesalekingltd@gmail.com
+                    </p>
+                </div>
+            </div>
+            <hr class="border-secondary my-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="text-light mb-0">&copy; 2025 The Wholesale King Ltd Services. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+   
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/* ========== DATA ========== */
+const products = [
+  {id:'tomato', name:'Organic Tomatoes', price:4.99, unit:'/lb', category:'fruit', popular:95,
+   img:'https://images.unsplash.com/photo-1561136594-7f68413baa99?auto=format&fit=crop&w=800&q=80',
+   desc:'Fresh, vine-ripened organic tomatoes.'},
+  {id:'spinach', name:'Fresh Spinach', price:3.99, unit:'/bunch', category:'leafy', popular:88,
+   img:'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=800&q=80',
+   desc:'Tender organic spinach leaves.'},
+  {id:'carrot', name:'Organic Carrots', price:2.99, unit:'/lb', category:'root', popular:83,
+   img:'https://images.unsplash.com/photo-1445282768818-728615cc910a?auto=format&fit=crop&w=800&q=80',
+   desc:'Sweet, crunchy organic carrots.'},
+  {id:'peppers', name:'Bell Peppers Mix', price:5.49, unit:'/lb', category:'fruit', popular:77,
+   img:'https://thewholesalekingltd.com/images/product-1.jpg',
+   desc:'Red, yellow, and green bell peppers.'},
+  {id:'kale', name:'Tuscan Kale', price:2.49, unit:'/bunch', category:'leafy', popular:70,
+   img:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80',
+   desc:'Hearty kale, perfect for salads.'},
+  {id:'potato', name:'Baby Potatoes', price:1.99, unit:'/lb', category:'root', popular:91,
+   img:'https://images.unsplash.com/photo-1526318472351-c75fcf070305?auto=format&fit=crop&w=800&q=80',
+   desc:'Creamy baby potatoes.'},
+  {id:'basil', name:'Fresh Basil', price:1.49, unit:'/bunch', category:'herbs', popular:86,
+   img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTW9QfyTa3_Kl5eFwwl8hvah0Pld2Fovbf2jg&s',
+   desc:'Fragrant basil for pesto and more.'},
+  {id:'cucumber', name:'Cucumbers', price:0.99, unit:'/pc', category:'fruit', popular:65,
+   img:'https://thewholesalekingltd.com/images/cucumber.jpg',
+   desc:'Crisp cucumbers for salads.'},
+];
+
+/* ========== STATE ========== */
+let cart = JSON.parse(localStorage.getItem('greentech_cart') || '[]');
+let currentCategory = 'all';
+let sortMode = 'name';
+let searchTerm = '';
+
+/* ========== HELPERS ========== */
+const fmt = n => '$' + n.toFixed(2);
+function saveCart(){ localStorage.setItem('greentech_cart', JSON.stringify(cart)); }
+function cartCount(){ return cart.reduce((s,i)=>s+i.qty,0); }
+function cartSubtotal(){ return cart.reduce((s,i)=>s + i.qty * i.price, 0); }
+
+/* ========== RENDER PRODUCTS ========== */
+function productCard(p){
+  return `
+  <div class="col-md-6 col-lg-4 col-xl-3">
+    <div class="card h-100" data-id="${p.id}">
+      <img src="${p.img}" alt="${p.name}" class="card-img-top"/>
+      <div class="card-body d-flex flex-column">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <span class="badge bg-success text-uppercase">${p.category}</span>
+          <span class="text-success fw-bold">${fmt(p.price)}${p.unit}</span>
+        </div>
+        <h5 class="card-title mb-1">${p.name}</h5>
+        <p class="card-text text-muted mb-3">${p.desc}</p>
+        <div class="mt-auto d-flex justify-content-between align-items-center">
+          <div class="input-group input-group-sm" style="width: 120px;">
+            <button class="btn btn-outline-secondary qty-minus" type="button">-</button>
+            <input type="text" class="form-control text-center qty-input" value="1" inputmode="numeric">
+            <button class="btn btn-outline-secondary qty-plus" type="button">+</button>
+          </div>
+          <button class="btn btn-success add-to-cart"><i class="fas fa-cart-plus me-1"></i>Add</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function applyFilters(){
+  let list = products.slice();
+  if(currentCategory!=='all'){ list = list.filter(p => p.category === currentCategory); }
+  const term = searchTerm.trim().toLowerCase();
+  if(term){ list = list.filter(p => p.name.toLowerCase().includes(term) || p.desc.toLowerCase().includes(term)); }
+  switch (sortMode){
+    case 'name': list.sort((a,b)=>a.name.localeCompare(b.name)); break;
+    case 'price-low': list.sort((a,b)=>a.price-b.price); break;
+    case 'price-high': list.sort((a,b)=>b.price-a.price); break;
+    case 'popular': list.sort((a,b)=>b.popular-a.popular); break;
+  }
+  document.getElementById('productsContainer').innerHTML = list.map(productCard).join('');
+}
+
+/* ========== CART RENDER ========== */
+function renderCart(){
+  const itemsEl = document.getElementById('cartItems');
+  if(cart.length===0){
+    itemsEl.innerHTML = `<div class="text-center py-5"><i class="fas fa-shopping-cart fa-3x mb-3 text-muted"></i><p class="text-muted mb-0">Your cart is empty</p></div>`;
+  }else{
+    itemsEl.innerHTML = cart.map((it,idx)=>`
+      <div class="cart-item" data-index="${idx}">
+        <div class="me-2">
+          <div class="fw-semibold">${it.name}</div>
+          <small class="text-muted">${it.qty} × ${fmt(it.price)}${it.unit}</small>
+        </div>
+        <div class="d-flex align-items-center">
+          <span class="text-success fw-bold me-3">${fmt(it.qty*it.price)}</span>
+          <button class="btn btn-sm btn-outline-danger cart-remove"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>`).join('');
+  }
+  document.getElementById('cartSubtotal').textContent = fmt(cartSubtotal());
+  document.getElementById('cartTotal').textContent = fmt(cartSubtotal());
+  document.getElementById('cartCount').textContent = cartCount();
+}
+
+/* ========== CART ACTIONS ========== */
+function addToCartById(id, qty){
+  const p = products.find(x=>x.id===id);
+  if(!p) return;
+  qty = Number(qty) || 1;
+  if(qty < 1) qty = 1;
+  const exist = cart.find(i=>i.id===id);
+  if(exist){ exist.qty += qty; } else { cart.push({id:p.id, name:p.name, price:p.price, unit:p.unit, qty}); }
+  saveCart(); renderCart();
+}
+function removeFromCartIndex(idx){ cart.splice(idx,1); saveCart(); renderCart(); }
+function clearCart(){ if(!confirm('Clear your cart?')) return; cart = []; saveCart(); renderCart(); }
+
+/* ========== SIDEBAR TOGGLE ========== */
+function openCart(){ document.getElementById('cartSidebar').style.right = '0px'; document.getElementById('cartOverlay').style.display = 'block'; renderCart(); }
+function closeCart(){ document.getElementById('cartSidebar').style.right = '-400px'; document.getElementById('cartOverlay').style.display = 'none'; }
+
+/* ========== WHATSAPP CHECKOUT ========== */
+function generateWhatsAppMessage(customerInfo) {
+  const whatsappNumber = "19176050484";
+  let message = `Hello! I would like to place an order:\n\n`;
+  
+  // Add order items
+  cart.forEach(item => {
+    message += `• ${item.name} - ${item.qty} ${item.unit.replace('/', '')} - ${fmt(item.qty * item.price)}\n`;
+  });
+  
+  // Add order summary
+  message += `\n*Order Total: ${fmt(cartSubtotal())}*\n\n`;
+  
+  // Add customer information
+  message += `*Customer Information:*\n`;
+  message += `Name: ${customerInfo.name}\n`;
+  message += `Phone: ${customerInfo.phone}\n`;
+  message += `Address: ${customerInfo.address}\n`;
+  
+  if (customerInfo.notes) {
+    message += `Notes: ${customerInfo.notes}\n`;
+  }
+  
+  message += `\nPlease confirm my order. Thank you!`;
+  
+  // Encode the message for URL
+  const encodedMessage = encodeURIComponent(message);
+  
+  // Return the WhatsApp URL
+  return `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+}
+
+function showCheckoutModal() {
+  if (cart.length === 0) {
+    alert("Your cart is empty. Please add items before checking out.");
+    return;
+  }
+  
+  // Update checkout summary
+  let summaryHTML = '';
+  cart.forEach(item => {
+    summaryHTML += `<div class="d-flex justify-content-between">
+      <span>${item.name} (${item.qty} ${item.unit.replace('/', '')})</span>
+      <span>${fmt(item.qty * item.price)}</span>
+    </div>`;
+  });
+  
+  summaryHTML += `<div class="d-flex justify-content-between border-top pt-2 mt-2 fw-bold">
+    <span>Total:</span>
+    <span>${fmt(cartSubtotal())}</span>
+  </div>`;
+  
+  document.getElementById('checkoutSummary').innerHTML = summaryHTML;
+  
+  // Show the modal
+  const checkoutModal = new bootstrap.Modal(document.getElementById('checkoutModal'));
+  checkoutModal.show();
+}
+
+function processWhatsAppCheckout() {
+  // Validate form
+  const name = document.getElementById('customerName').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
+  const address = document.getElementById('customerAddress').value.trim();
+  
+  if (!name || !phone || !address) {
+    alert("Please fill in all required fields (name, phone, and address).");
+    return;
+  }
+  
+  // Collect customer info
+  const customerInfo = {
+    name: name,
+    phone: phone,
+    address: address,
+    notes: document.getElementById('customerNotes').value.trim()
+  };
+  
+  // Generate WhatsApp URL
+  const whatsappUrl = generateWhatsAppMessage(customerInfo);
+  
+  // Close modal
+  const checkoutModal = bootstrap.Modal.getInstance(document.getElementById('checkoutModal'));
+  checkoutModal.hide();
+  
+  // Close cart sidebar
+  closeCart();
+  
+  // Redirect to WhatsApp
+  window.open(whatsappUrl, '_blank');
+  
+  // Clear cart after successful order placement
+  cart = [];
+  saveCart();
+  renderCart();
+  
+  // Show success message
+  alert("Thank you for your order! You're being redirected to WhatsApp to complete your purchase.");
+}
+
+/* ========== EVENTS ========== */
+document.addEventListener('click', e=>{
+  if(e.target.closest('.add-to-cart')){
+    const card = e.target.closest('.card');
+    const id = card.dataset.id;
+    const qty = card.querySelector('.qty-input').value;
+    addToCartById(id, qty);
+  }
+  if(e.target.closest('.qty-plus')){
+    const input = e.target.closest('.card').querySelector('.qty-input');
+    input.value = Number(input.value)+1;
+  }
+  if(e.target.closest('.qty-minus')){
+    const input = e.target.closest('.card').querySelector('.qty-input');
+    input.value = Math.max(1, Number(input.value)-1);
+  }
+  if(e.target.closest('.cart-remove')){
+    const idx = e.target.closest('.cart-item').dataset.index;
+    removeFromCartIndex(idx);
+  }
+});
+document.getElementById('clearCartBtn').addEventListener('click', clearCart);
+document.getElementById('closeCartBtn').addEventListener('click', closeCart);
+document.getElementById('cartOverlay').addEventListener('click', closeCart);
+document.getElementById('whatsappCheckoutBtn').addEventListener('click', showCheckoutModal);
+document.getElementById('confirmWhatsAppBtn').addEventListener('click', processWhatsAppCheckout);
+function toggleCart(){ const sidebar = document.getElementById('cartSidebar'); if(sidebar.style.right==='0px'){ closeCart(); } else { openCart(); } }
+
+/* FILTERS */
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCategory = btn.dataset.category;
+    applyFilters();
+  });
+});
+document.getElementById('sortSelect').addEventListener('change', e=>{ sortMode = e.target.value; applyFilters(); });
+document.getElementById('searchBtn').addEventListener('click', ()=>{ searchTerm = document.getElementById('searchInput').value; applyFilters(); });
+document.getElementById('searchInput').addEventListener('keypress', e=>{ if(e.key==='Enter'){ searchTerm = e.target.value; applyFilters(); }});
+
+/* INIT */
+applyFilters();
+renderCart();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greenhouse Services - The Wholesale King Ltd Services</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-green: #22c55e;
+            --primary-green-dark: #16a34a;
+            --primary-green-light: #4ade80;
+            --primary-green-faded: rgba(34, 197, 94, 0.1);
+            --dark-bg: #0f172a;
+            --text-dark: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted: #64748b;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background-color: #f8fafc;
+        }
+        
+        .top-contact-bar {
+            background: linear-gradient(90deg, var(--primary-green), var(--primary-green-dark));
+            color: white;
+            padding: 6px 0;
+            font-size: 0.85rem;
+        }
+        
+        .top-contact-bar a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .top-contact-bar a:hover {
+            color: var(--text-light);
+            text-decoration: underline;
+        }
+        
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 0;
+            transition: var(--transition);
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            color: var(--primary-green) !important;
+            font-size: 1.6rem;
+        }
+        
+        .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-green);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-green) !important;
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 70%;
+        }
+        
+        .hero-section {
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://thewholesalekingltd.com/images/about.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hero-content {
+            z-index: 1;
+        }
+        
+        .btn {
+            border-radius: 50px;
+            font-weight: 600;
+            padding: 0.8rem 2rem;
+            transition: var(--transition);
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3);
+        }
+        
+        .btn-outline-light {
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline-light:hover {
+            background: white;
+            color: var(--primary-green);
+        }
+        
+        .service-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            height: 100%;
+            border: none;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .service-card:hover .service-image img {
+            transform: scale(1.1);
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: var(--primary-green);
+            border-radius: 2px;
+        }
+        
+        .section-title.text-center::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .feature-item {
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: var(--transition);
+            background: var(--card-bg);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin: 1rem;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 5rem;
+            color: var(--primary-green-faded);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .client-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-green);
+        }
+        
+        footer {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-title {
+            position: relative;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-green);
+        }
+        
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-link:hover {
+            color: var(--primary-green);
+            transform: translateX(5px);
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition);
+            margin-right: 0.5rem;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary-green);
+            transform: translateY(-3px);
+        }
+        
+        .animate-up {
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+        
+        .animate-up.animated {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* New styles for enhanced sections */
+        .service-highlight-card {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            height: 100%;
+        }
+        
+        .service-highlight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-highlight-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-highlight-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .service-highlight-card:hover .service-highlight-image img {
+            transform: scale(1.1);
+        }
+        
+        .pricing-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            height: 100%;
+            border-top: 4px solid var(--primary-green);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .pricing-feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .pricing-feature-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .pricing-feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .pricing-feature-list li::before {
+            content: "✓";
+            color: var(--primary-green);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            height: 250px;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        .process-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3rem;
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .process-image {
+            flex: 0 0 40%;
+            height: 300px;
+        }
+        
+        .process-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .process-content {
+            flex: 0 0 60%;
+            padding: 2rem;
+        }
+        
+        .process-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary-green-faded);
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            z-index: -1;
+        }
+        
+        @media (max-width: 992px) {
+            .process-step {
+                flex-direction: column;
+            }
+            
+            .process-image, .process-content {
+                flex: 0 0 100%;
+            }
+            
+            .process-image {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 0.7rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-contact-bar">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="d-flex gap-4">
+                        <a href="mailto:thewholesalekingltd@gmail.com">
+                            <i class="fas fa-envelope me-1"></i> thewholesalekingltd@gmail.com
+                        </a>
+                        <a href="tel:+19176050484">
+                            <i class="fas fa-phone me-1"></i> +1 917-605-0484
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="d-flex gap-3 justify-content-md-end">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                The Wholesale King Ltd
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="greenhouse.html">Greenhouse</a></li>
+                    <li class="nav-item"><a class="nav-link" href="vegetables.html">Vegetables</a></li>
+                    <li class="nav-item"><a class="nav-link" href="freight.html">Freight</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                            <a class="btn btn-quote ms-3" 
+            href="https://wa.me/19176050484?text=Hello%20Wholesale%20King,%20I%20would%20like%20to%20get%20a%20quote." 
+            target="_blank">
+            <i class="fab fa-whatsapp me-1"></i> Get Quote
+            </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="container hero-content">
+            <div class="row align-items-center min-vh-80">
+                <div class="col-lg-8">
+                    <h1 class="display-3 fw-bold text-white mb-4 animate-up">Professional Greenhouse Solutions</h1>
+                    <p class="lead text-light mb-4 animate-up" style="transition-delay: 0.2s;">
+                        From design to construction and maintenance, we provide complete greenhouse solutions for optimal crop production and sustainable farming.
+                    </p>
+                    <div class="d-flex gap-3 flex-wrap animate-up" style="transition-delay: 0.4s;">
+                        <a href="#services" class="btn btn-success btn-lg">
+                            <i class="fas fa-seedling me-2"></i>Our Services
+                        </a>
+                        <a href="#contact-form" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-phone me-2"></i>Get Quote
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-5">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="section-title display-5 fw-bold mb-3">Our Greenhouse Services</h2>
+                    <p class="lead text-muted">Comprehensive solutions for modern agricultural needs</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 animate-up">
+                    <div class="service-highlight-card">
+
+                        <div class="p-4">
+                            <h4 class="fw-bold mb-3">Construction</h4>
+                            <p class="text-muted mb-4">
+                                Complete greenhouse construction from foundation to finishing with premium materials and modern techniques.
+                            </p>
+                            <ul class="list-unstyled text-muted">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Foundation & Structure</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Climate Control Systems</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Irrigation Installation</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Ventilation Systems</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 animate-up" style="transition-delay: 0.2s;">
+                    <div class="service-highlight-card">
+
+                        <div class="p-4">
+                            <h4 class="fw-bold mb-3">Maintenance</h4>
+                            <p class="text-muted mb-4">
+                                Regular maintenance and repair services to keep your greenhouse operating at peak efficiency.
+                            </p>
+                            <ul class="list-unstyled text-muted">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Regular Inspections</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Equipment Servicing</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Emergency Repairs</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>System Upgrades</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 animate-up" style="transition-delay: 0.4s;">
+                    <div class="service-highlight-card">
+
+                        <div class="p-4">
+                            <h4 class="fw-bold mb-3">Consultation</h4>
+                            <p class="text-muted mb-4">
+                                Expert consultation services for greenhouse design, crop planning, and operational optimization.
+                            </p>
+                            <ul class="list-unstyled text-muted">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Site Assessment</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Design Planning</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Crop Consultation</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Efficiency Analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="section-title display-5 fw-bold mb-3">Our Greenhouse Projects</h2>
+                    <p class="lead text-muted">See our work in action</p>
+                </div>
+            </div>
+            <div class="gallery-container">
+
+                <div class="gallery-item animate-up" style="transition-delay: 0.2s;">
+                    <img src="https://images.unsplash.com/photo-1574856344991-aaa31b6f4ce3?auto=format&fit=crop&w=600&q=80" alt="Vegetable Production">
+                    <div class="gallery-caption">Vegetable Production</div>
+                </div>
+                <div class="gallery-item animate-up" style="transition-delay: 0.3s;">
+                    <img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=600&q=80" alt="Greenhouse Interior">
+                    <div class="gallery-caption">Greenhouse Interior</div>
+                </div>
+                <div class="gallery-item animate-up" style="transition-delay: 0.4s;">
+                    <img src="	https://fairviewgardencenter.com/wp-content/uploads/2022/01/services_consultation.jpg" alt="Installation Process">
+                    <div class="gallery-caption">Installation Process</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="section-title display-5 fw-bold mb-3">Our Process</h2>
+                    <p class="lead text-muted">How we deliver excellence from concept to completion</p>
+                </div>
+            </div>
+            
+            <div class="process-step animate-up">
+                <div class="process-image">
+                    <img src="https://images.unsplash.com/photo-1588200908342-23b585c03e26?auto=format&fit=crop&w=600&q=80" alt="Consultation">
+                </div>
+                <div class="process-content position-relative">
+                    <span class="process-number">1</span>
+                    <h3 class="fw-bold mb-3">Consultation & Planning</h3>
+                    <p class="text-muted">We begin with a thorough assessment of your needs and develop a customized plan that aligns with your goals, budget, and site conditions.</p>
+                </div>
+            </div>
+            
+            <div class="process-step animate-up" style="transition-delay: 0.2s;">
+                <div class="process-content position-relative">
+                    <span class="process-number">2</span>
+                    <h3 class="fw-bold mb-3">Design & Engineering</h3>
+                    <p class="text-muted">Our team creates detailed designs and engineering plans, ensuring structural integrity, efficiency, and optimal growing conditions.</p>
+                </div>
+                <div class="process-image">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=600&q=80" alt="Design">
+                </div>
+            </div>
+            
+            <div class="process-step animate-up" style="transition-delay: 0.4s;">
+                <div class="process-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUppcH4OA5D9aV-ZF18wkvGARCm1oNQvFcXQ&s" alt="Construction">
+                </div>
+                <div class="process-content position-relative">
+                    <span class="process-number">3</span>
+                    <h3 class="fw-bold mb-3">Construction & Installation</h3>
+                    <p class="text-muted">Our skilled team brings the plan to life with precision and attention to detail, using the highest quality materials and techniques.</p>
+                </div>
+            </div>
+            
+            <div class="process-step animate-up" style="transition-delay: 0.6s;">
+                <div class="process-content position-relative">
+                    <span class="process-number">4</span>
+                    <h3 class="fw-bold mb-3">Maintenance & Support</h3>
+                    <p class="text-muted">We provide ongoing maintenance and support to ensure your greenhouse operates at peak efficiency and productivity.</p>
+                </div>
+                <div class="process-image">
+                    <img src="	https://asthor.com/en/wp-content/uploads/sites/3/2024/10/instalacion-3-uai-720x480.jpg" alt="Maintenance">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="section-title display-5 fw-bold mb-3">Greenhouse Packages</h2>
+                    <p class="lead text-muted">Choose the package that fits your needs</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 animate-up">
+                    <div class="pricing-card text-center">
+                        <h4 class="fw-bold mb-3">Starter Package</h4>
+                        <div class="price mb-4">
+                            <span class="h2 fw-bold text-success">$15,000</span>
+                            <span class="text-muted">+</span>
+                        </div>
+                        <ul class="pricing-feature-list mb-4">
+                            <li>Basic greenhouse structure</li>
+                            <li>Standard ventilation system</li>
+                            <li>Manual irrigation setup</li>
+                            <li>Single-layer covering</li>
+                            <li>1-year warranty</li>
+                        </ul>
+                        <button class="btn btn-outline-success w-100" onclick="requestQuote('Starter Package')">
+                            Request Quote
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-4 animate-up" style="transition-delay: 0.2s;">
+                    <div class="pricing-card text-center">
+                        <div class="position-relative">
+                            <span class="position-absolute top-0 start-50 translate-middle badge bg-success">Most Popular</span>
+                        </div>
+                        <h4 class="fw-bold mb-3">Professional Package</h4>
+                        <div class="price mb-4">
+                            <span class="h2 fw-bold text-success">$35,000</span>
+                            <span class="text-muted">+</span>
+                        </div>
+                        <ul class="pricing-feature-list mb-4">
+                            <li>Commercial-grade structure</li>
+                            <li>Automated climate control</li>
+                            <li>Drip irrigation system</li>
+                            <li>Double-layer insulated covering</li>
+                            <li>Energy-efficient systems</li>
+                            <li>3-year warranty</li>
+                        </ul>
+                        <button class="btn btn-success w-100" onclick="requestQuote('Professional Package')">
+                            Request Quote
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-4 animate-up" style="transition-delay: 0.4s;">
+                    <div class="pricing-card text-center">
+                        <h4 class="fw-bold mb-3">Enterprise Package</h4>
+                        <div class="price mb-4">
+                            <span class="h2 fw-bold text-success">$75,000</span>
+                            <span class="text-muted">+</span>
+                        </div>
+                        <ul class="pricing-feature-list mb-4">
+                            <li>Industrial-grade structure</li>
+                            <li>Fully automated systems</li>
+                            <li>Advanced hydroponics/aquaponics</li>
+                            <li>Computerized monitoring</li>
+                            <li>Solar power options</li>
+                            <li>5-year warranty</li>
+                            <li>Priority support</li>
+                        </ul>
+                        <button class="btn btn-outline-success w-100" onclick="requestQuote('Enterprise Package')">
+                            Request Quote
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-form" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card border-0 shadow-lg">
+                        <div class="card-header bg-success text-white text-center py-4">
+                            <h3 class="mb-0">Request a Free Consultation</h3>
+                            <p class="mb-0">Get expert advice for your greenhouse project</p>
+                        </div>
+                        <div class="card-body p-4">
+                            <form id="greenhouseForm">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+                                            <label for="name">Full Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="email" placeholder="Your Email" required>
+                                            <label for="email">Email Address</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="tel" class="form-control" id="phone" placeholder="Your Phone" required>
+                                            <label for="phone">Phone Number</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <select class="form-select" id="service" required>
+                                                <option value="">Select Service</option>
+                                                <option value="construction">Construction</option>
+                                                <option value="maintenance">Maintenance</option>
+                                                <option value="consultation">Consultation</option>
+                                                <option value="full-package">Full Package</option>
+                                            </select>
+                                            <label for="service">Service Type</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="number" class="form-control" id="size" placeholder="Greenhouse Size">
+                                            <label for="size">Greenhouse Size (sq ft)</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <textarea class="form-control" id="message" placeholder="Your Message" style="height: 120px"></textarea>
+                                            <label for="message">Project Details</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="newsletter">
+                                            <label class="form-check-label" for="newsletter">Subscribe to our newsletter for tips and updates</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <button type="submit" class="btn btn-success btn-lg px-5">
+                                            Submit Request
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-3">The Wholesale King Ltd</h5>
+                    <p class="text-light">Your trusted partner for greenhouse construction, fresh vegetables, and reliable freight services.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="text-white mb-3">Services</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="greenhouse.html" class="footer-link">Greenhouse</a></li>
+                        <li><a href="vegetables.html" class="footer-link">Vegetables</a></li>
+                        <li><a href="freight.html" class="footer-link">Freight</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="text-white mb-3">Company</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="about.html" class="footer-link">About Us</a></li>
+                        <li><a href="contact.html" class="footer-link">Contact</a></li>
+                        <li><a href="blog.html" class="footer-link">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h6 class="text-white mb-3">Contact Info</h6>
+                    <p class="text-light mb-2">
+                        <i class="fas fa-map-marker-alt me-2"></i> Head Office: Trinidad & Tobago
+                    </p>
+                    <p class="text-light mb-2">
+                        <i class="fas fa-phone me-2"></i> +1 917-605-0484
+                    </p>
+                    <p class="text-light mb-2">
+                        <i class="fas fa-envelope me-2"></i> thewholesalekingltd@gmail.com
+                    </p>
+                </div>
+            </div>
+            <hr class="border-secondary my-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="text-light mb-0">&copy; 2025 The Wholesale King Ltd Services. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function requestQuote(packageName) {
+            alert("Quote requested for: " + packageName + "\nOur team will contact you shortly.");
+        }
+        
+        document.getElementById('greenhouseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("Thank you for your consultation request! We will contact you within 24 hours.");
+            this.reset();
+        });
+        
+        // Animate elements on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate-up');
+            
+            function checkScroll() {
+                animateElements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.classList.add('animated');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', checkScroll);
+            checkScroll();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.The Wholesale King Ltd
+services.com/sitemap.xml
+
+# Disallow admin areas
+Disallow: /admin/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /scripts/
+
+# Allow important pages
+Allow: /index.html
+Allow: /greenhouse.html
+Allow: /vegetables.html
+Allow: /freight.html
+Allow: /about.html
+Allow: /contact.html
+Allow: /blog.html
+Allow: /privacy.html
+
+# Crawl delay (optional)
+Crawl-delay: 1

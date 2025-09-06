@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - The Wholesale King Ltd
+ Services</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #22c55e;
+            --primary-green-dark: #16a34a;
+            --primary-green-light: #4ade80;
+            --primary-green-faded: rgba(34, 197, 94, 0.1);
+            --dark-bg: #0f172a;
+            --text-dark: #1e293b;
+            --text-light: #f8fafc;
+            --text-muted: #64748b;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background-color: #f8fafc;
+        }
+        
+        /* Top Contact Bar */
+        .top-contact-bar {
+            background: linear-gradient(90deg, var(--primary-green), var(--primary-green-dark));
+            color: white;
+            padding: 6px 0;
+            font-size: 0.85rem;
+        }
+        
+        .top-contact-bar a {
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .top-contact-bar a:hover {
+            color: var(--text-light);
+            text-decoration: underline;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 0;
+            transition: var(--transition);
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            color: var(--primary-green) !important;
+            font-size: 1.6rem;
+        }
+        
+        .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-green);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-green) !important;
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 70%;
+        }
+        
+        /* Hero Section with Moving Background */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7));
+        }
+        
+        .hero-bg-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .hero-bg-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hero-bg-slide.active {
+            opacity: 1;
+        }
+        
+        .hero-content {
+            z-index: 1;
+        }
+        
+        /* Buttons */
+        .btn {
+            border-radius: 50px;
+            font-weight: 600;
+            padding: 0.8rem 2rem;
+            transition: var(--transition);
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3);
+        }
+        
+        .btn-outline-light {
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline-light:hover {
+            background: white;
+            color: var(--primary-green);
+        }
+        
+        /* Cards */
+        .service-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            height: 100%;
+            border: none;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: var(--primary-green);
+            border-radius: 2px;
+        }
+        
+        .section-title.text-center::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* Why Choose Us */
+        .feature-item {
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: var(--transition);
+            background: var(--card-bg);
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+        
+        /* Testimonials */
+        .testimonial-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            margin: 1rem;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 5rem;
+            color: var(--primary-green-faded);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .client-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-green);
+        }
+        
+        /* Newsletter */
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-title {
+            position: relative;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-green);
+        }
+        
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-link:hover {
+            color: var(--primary-green);
+            transform: translateX(5px);
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition);
+            margin-right: 0.5rem;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary-green);
+            transform: translateY(-3px);
+        }
+        
+        /* Animations */
+        .animate-up {
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 0.8s ease, opacity 0.8s ease;
+        }
+        
+        .animate-up.animated {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 0.7rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Contact Bar -->
+    <div class="top-contact-bar">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="d-flex gap-4">
+                        <a href="mailto:thewholesalekingltd@gmail.com">
+                            <i class="fas fa-envelope me-1"></i> thewholesalekingltd@gmail.com
+                        </a>
+                        <a href="tel:+15551234567">
+                            <i class="fas fa-phone me-1"></i> 	+1 917-605-0484
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="d-flex gap-3 justify-content-md-end">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                </i>The Wholesale King Ltd            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="greenhouse.html">Greenhouse</a></li>
+                    <li class="nav-item"><a class="nav-link" href="vegetables.html">Vegetables</a></li>
+                    <li class="nav-item"><a class="nav-link" href="freight.html">Freight</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section-small">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 text-center">
+                    <h1 class="display-4 fw-bold text-white mb-4">
+                        <i class="fas fa-blog text-success me-3"></i>The Wholesale King Ltd
+ Blog
+                    </h1>
+                    <p class="lead text-light">Insights, tips, and news from the world of agriculture and logistics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Article -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card bg-dark border-success">
+                        <div class="row g-0">
+                            <div class="col-md-6">
+                                <img src="modern-greenhouse-structure.png" class="img-fluid rounded-start h-100" alt="Featured Article" style="object-fit: cover;">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body p-4">
+                                    <span class="badge bg-success mb-2">Featured</span>
+                                    <h3 class="card-title text-white mb-3">The Future of Sustainable Agriculture: Smart Greenhouse Technology</h3>
+                                    <p class="card-text text-light">
+                                        Discover how modern greenhouse technology is revolutionizing sustainable farming practices. 
+                                        From automated climate control to AI-powered crop monitoring, learn about the innovations 
+                                        shaping the future of agriculture.
+                                    </p>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <small class="text-muted">
+                                            <i class="fas fa-calendar me-2"></i>January 10, 2024
+                                            <i class="fas fa-user ms-3 me-2"></i>John Martinez
+                                            <i class="fas fa-clock ms-3 me-2"></i>5 min read
+                                        </small>
+                                    </div>
+                                    <a href="#" class="btn btn-success">Read Full Article</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Categories -->
+    <section class="py-4 bg-dark-subtle">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h5 class="text-white mb-3 mb-lg-0">Browse by Category:</h5>
+                </div>
+                <div class="col-lg-6">
+                    <div class="d-flex gap-2 flex-wrap">
+                        <button class="btn btn-success filter-btn active" data-category="all">All Posts</button>
+                        <button class="btn btn-outline-success filter-btn" data-category="greenhouse">Greenhouse</button>
+                        <button class="btn btn-outline-success filter-btn" data-category="agriculture">Agriculture</button>
+                        <button class="btn btn-outline-success filter-btn" data-category="logistics">Logistics</button>
+                        <button class="btn btn-outline-success filter-btn" data-category="sustainability">Sustainability</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4" id="blogPosts">
+                <!-- Greenhouse Category -->
+                <div class="col-lg-4 col-md-6 blog-post" data-category="greenhouse">
+                    <div class="card bg-dark border-0 h-100">
+                        <img src="modern-greenhouse-structure.png" class="card-img-top" alt="Greenhouse Automation" style="height: 200px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-success mb-2 align-self-start">Greenhouse</span>
+                            <h5 class="card-title text-white">Greenhouse Automation: ROI and Benefits</h5>
+                            <p class="card-text text-light flex-grow-1">
+                                Learn how automated greenhouse systems can increase yields by up to 30% while reducing labor costs and improving crop quality.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <i class="fas fa-calendar me-1"></i>Jan 8, 2024
+                                </small>
+                                <a href="#" class="btn btn-outline-success btn-sm">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agriculture Category -->
+                <div class="col-lg-4 col-md-6 blog-post" data-category="agriculture">
+                    <div class="card bg-dark border-0 h-100">
+                        <img src="fresh-organic-vegetables-market.png" class="card-img-top" alt="Organic Farming" style="height: 200px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-warning mb-2 align-self-start">Agriculture</span>
+                            <h5 class="card-title text-white">Organic Farming: Best Practices for 2024</h5>
+                            <p class="card-text text-light flex-grow-1">
+                                Explore the latest organic farming techniques and certification requirements to maximize your organic crop production.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <i class="fas fa-calendar me-1"></i>Jan 5, 2024
+                                </small>
+                                <a href="#" class="btn btn-outline-success btn-sm">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logistics Category -->
+                <div class="col-lg-4 col-md-6 blog-post" data-category="logistics">
+                    <div class="card bg-dark border-0 h-100">
+                        <img src="freight-truck-logistics-delivery.png" class="card-img-top" alt="Cold Chain Logistics" style="height: 200px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-info mb-2 align-self-start">Logistics</span>
+                            <h5 class="card-title text-white">Cold Chain Logistics for Fresh Produce</h5>
+                            <p class="card-text text-light flex-grow-1">
+                                Understanding the importance of temperature-controlled transportation in maintaining produce quality and extending shelf life.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <i class="fas fa-calendar me-1"></i>Jan 3, 2024
+                                </small>
+                                <a href="#" class="btn btn-outline-success btn-sm">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sustainability Category -->
+                <div class="col-lg-4 col-md-6 blog-post" data-category="sustainability">
+                    <div class="card bg-dark border-0 h-100">
+                        <img src="modern-greenhouse-structure.png" class="card-img-top" alt="Sustainable Practices" style="height: 200px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-success mb-2 align-self-start">Sustainability</span>
+                            <h5 class="card-title text-white">Reducing Carbon Footprint in Agriculture</h5>
+                            <p class="card-text text-light flex-grow-1">
+                                Practical strategies for implementing sustainable practices that reduce environmental impact while maintaining profitability.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <i class="fas fa-calendar me-1"></i>Dec 28, 2023
+                                </small>
+                                <a href="#" class="btn btn-outline-success btn-sm">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More Agriculture -->
+                <div class="col-lg-4 col-md-6 blog-post" data-category="agriculture">
+                    <div class="card bg-dark border-0 h-100">
+                        <img src="fresh-organic-vegetables-market.png" class="card-img-top" alt="Crop Rotation" style="height: 200px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-warning mb-2 align-self-start">Agriculture</span>
+                            <h5 class="card-title text-white">Crop Rotation Strategies for Maximum Yield</h5>
+                            <p class="card-text text-light flex-grow-1">
+                                Learn how proper crop rotation can improve soil health, reduce pest problems, and increase overall farm productivity.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <i class="fas fa-calendar me-1"></i>Dec 25, 2023
+                                </small>
+                                <a href="#" class="btn btn-outline-success btn-sm">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More Logistics -->
+                <div class="col-lg-4 col-md-6 blog-post" data-category="logistics">
+                    <div class="card bg-dark border-0 h-100">
+                        <img src="freight-truck-logistics-delivery.png" class="card-img-top" alt="Supply Chain" style="height: 200px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
+                            <span class="badge bg-info mb-2 align-self-start">Logistics</span>
+                            <h5 class="card-title text-white">Optimizing Agricultural Supply Chains</h5>
+                            <p class="card-text text-light flex-grow-1">
+                                Discover how technology and strategic planning can streamline your agricultural supply chain for better efficiency.
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <i class="fas fa-calendar me-1"></i>Dec 22, 2023
+                                </small>
+                                <a href="#" class="btn btn-outline-success btn-sm">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="py-5 bg-dark-subtle">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="display-6 fw-bold text-white mb-3">Stay Updated</h2>
+                    <p class="lead text-light mb-4">Subscribe to our newsletter for the latest agricultural insights and company updates</p>
+                    <form class="row g-3 justify-content-center">
+                        <div class="col-md-6">
+                            <input type="email" class="form-control bg-dark text-white border-secondary" placeholder="Enter your email address" required>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-paper-plane me-2"></i>Subscribe
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-3">
+                        </i>The Wholesale King Ltd                    </h5>
+                    <p class="text-light">Your trusted partner for greenhouse construction, fresh vegetables, and reliable freight services.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-light"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-instagram fa-lg"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-linkedin fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="text-white mb-3">Services</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="greenhouse.html" class="text-light text-decoration-none">Greenhouse</a></li>
+                        <li><a href="vegetables.html" class="text-light text-decoration-none">Vegetables</a></li>
+                        <li><a href="freight.html" class="text-light text-decoration-none">Freight</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h6 class="text-white mb-3">Company</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="about.html" class="text-light text-decoration-none">About Us</a></li>
+                        <li><a href="contact.html" class="text-light text-decoration-none">Contact</a></li>
+                        <li><a href="blog.html" class="text-light text-decoration-none">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h6 class="text-white mb-3">Contact Info</h6>
+                    <p class="text-light mb-2">
+                        <i class="fas fa-map-marker-alt me-2"></i> Head Office: Trinidad & Tobago
+                    </p>
+                    <p class="text-light mb-2">
+                        <i class="fas fa-phone me-2"></i>	+1 917-605-0484
+                    </p>
+                    <p class="text-light mb-2">
+                        <i class="fas fa-envelope me-2"></i>thewholesalekingltd@gmail.com
+                    </p>
+                </div>
+            </div>
+            <hr class="border-secondary my-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="text-light mb-0">&copy; 2025 The Wholesale King Ltd
+ Services. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Blog filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const blogPosts = document.querySelectorAll('.blog-post');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Update active button
+                    filterBtns.forEach(b => {
+                        b.classList.remove('active', 'btn-success');
+                        b.classList.add('btn-outline-success');
+                    });
+                    this.classList.add('active', 'btn-success');
+                    this.classList.remove('btn-outline-success');
+
+                    const category = this.dataset.category;
+
+                    // Filter posts
+                    blogPosts.forEach(post => {
+                        if (category === 'all' || post.dataset.category === category) {
+                            post.style.display = 'block';
+                            post.classList.add('fade-in');
+                        } else {
+                            post.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
