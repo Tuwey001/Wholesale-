@@ -633,7 +633,7 @@ function applyFilters(){
 function renderCart(){
   const itemsEl = document.getElementById('cartItems');
   if(cart.length===0){
-    itemsEl.innerHTML = <div class="text-center py-5"><i class="fas fa-shopping-cart fa-3x mb-3 text-muted"></i><p class="text-muted mb-0">Your cart is empty</p></div>;
+    itemsEl.innerHTML = `<div class="text-center py-5"><i class="fas fa-shopping-cart fa-3x mb-3 text-muted"></i><p class="text-muted mb-0">Your cart is empty</p></div>`;
   }else{
     itemsEl.innerHTML = cart.map((it,idx)=>`
       <div class="cart-item" data-index="${idx}">
@@ -671,34 +671,34 @@ function closeCart(){ document.getElementById('cartSidebar').style.right = '-400
 
 /* ========== WHATSAPP CHECKOUT ========== */
 function generateWhatsAppMessage(customerInfo) {
-  const whatsappNumber = "254712784693";
-  let message = Hello! I would like to place an order:\n\n;
+  const whatsappNumber = "19176050484";
+  let message = `Hello! I would like to place an order:\n\n`;
   
   // Add order items
   cart.forEach(item => {
-    message += • ${item.name} - ${item.qty} ${item.unit.replace('/', '')} - ${fmt(item.qty * item.price)}\n;
+    message += `• ${item.name} - ${item.qty} ${item.unit.replace('/', '')} - ${fmt(item.qty * item.price)}\n`;
   });
   
   // Add order summary
-  message += \n*Order Total: ${fmt(cartSubtotal())}*\n\n;
+  message += `\n*Order Total: ${fmt(cartSubtotal())}*\n\n`;
   
   // Add customer information
-  message += *Customer Information:*\n;
-  message += Name: ${customerInfo.name}\n;
-  message += Phone: ${customerInfo.phone}\n;
-  message += Address: ${customerInfo.address}\n;
+  message += `*Customer Information:*\n`;
+  message += `Name: ${customerInfo.name}\n`;
+  message += `Phone: ${customerInfo.phone}\n`;
+  message += `Address: ${customerInfo.address}\n`;
   
   if (customerInfo.notes) {
-    message += Notes: ${customerInfo.notes}\n;
+    message += `Notes: ${customerInfo.notes}\n`;
   }
   
-  message += \nPlease confirm my order. Thank you!;
+  message += `\nPlease confirm my order. Thank you!`;
   
   // Encode the message for URL
   const encodedMessage = encodeURIComponent(message);
   
   // Return the WhatsApp URL
-  return https://wa.me/${whatsappNumber}?text=${encodedMessage};
+  return `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 }
 
 function showCheckoutModal() {
